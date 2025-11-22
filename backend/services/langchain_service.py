@@ -1,26 +1,25 @@
 from langchain_ollama import ChatOllama
-from util.preprocess import preprocess
 
 agent = ChatOllama(model='deepseek-llm:7b')
     
 
-def generate_resume(job_description: str, resume: str):
+def optimize_resume(job_description: str, resume: str):
     messages = [
     (
-        "system", system_prompt
+        "system", system_prompt_for_optimization()
     ),
     (
-        "human", get_user_prompt(job_description, resume)
+        "human", get_user_prompt_for_optimization(job_description, resume)
     ),
     ]
     return agent.invoke(messages).content
 
 
 
-def get_system_prompt() -> str:
-    return system_prompt
+def get_system_prompt_for_optimization() -> str:
+    return system_prompt_for_optimization
 
-def get_user_prompt(job_description: str, resume: str):
+def get_user_prompt_for_optimization(job_description: str, resume: str):
     return f"""
                 Rewrite and optimize the following resume to closely match the job description.
 
@@ -39,7 +38,7 @@ def get_user_prompt(job_description: str, resume: str):
                     - Output only the optimized resume (no explanation).
             """
 
-system_prompt = """
+system_prompt_for_optimization = """
                     You are an ATS resume optimization expert trained to rewrite resumes using the
                     exact language, responsibilities, and keywords from the job description.
 

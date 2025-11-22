@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.get('/')
 def index():
     return {
-        "App": "AI Resume Generator"
+        "App": "AI Resume Optimizer and Generator"
     }
 
 app.register_blueprint(generator_router, url_prefix="/generator")
