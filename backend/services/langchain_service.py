@@ -6,7 +6,7 @@ agent = ChatOllama(model='deepseek-llm:7b')
 def optimize_resume(job_description: str, resume: str):
     messages = [
     (
-        "system", system_prompt_for_optimization()
+        "system", get_system_prompt_for_optimization()
     ),
     (
         "human", get_user_prompt_for_optimization(job_description, resume)
@@ -14,6 +14,9 @@ def optimize_resume(job_description: str, resume: str):
     ]
     return agent.invoke(messages).content
 
+
+def generate_resume(job_description: str, resume: str):
+    return "Stay tuned"
 
 
 def get_system_prompt_for_optimization() -> str:
