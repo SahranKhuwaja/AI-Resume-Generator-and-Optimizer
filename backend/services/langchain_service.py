@@ -57,6 +57,9 @@ system_prompt_for_optimization = """
                         - Make resume ATS-friendly.
                         - Keep formatting clean and consistent.
                         - Goal: achieve a 90–100% similarity score with the job description.
+                        - Output only the optimized resume (no keywords like 'optimized resume is' etc.)
+                        - Name should be Bold and centered.
+                        - All section titles should be bold
                 """
 
 

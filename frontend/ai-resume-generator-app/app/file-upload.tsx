@@ -10,7 +10,7 @@ interface FileUploadProps {
   selectedFile: File | null
 }
 
-export function FileUpload({ onFileSelect, selectedFile }: FileUploadProps) {
+export default function FileUpload({ onFileSelect, selectedFile }: FileUploadProps) {
   const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 

@@ -1,17 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { FileText, Upload, Sparkles, ArrowRight } from 'lucide-react'
-import { FileUpload } from './file-upload'
+import  FileUpload  from './file-upload'
+import  DownloadResume from './downloadResume'
+import axios from 'axios'
 
 export function ResumeOptimizer() {
   const [jobDescription, setJobDescription] = useState('')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
+  const [backendEndpoint, setBackendEndpoint] = useState('http://127.0.0.1:5000')
+  const [isGenerated, setIsGenerated] = useState(false)
+  const [generatedResume, setGeneratedResume] = useState("")
 
   const handleGenerate = async () => {
     if (!jobDescription.trim() || !uploadedFile) {
@@ -19,17 +24,36 @@ export function ResumeOptimizer() {
     }
     
     setIsGenerating(true)
-    // Simulate generation process
     await new Promise(resolve => setTimeout(resolve, 2000))
-    setIsGenerating(false)
-    
-    // Handle resume generation logic here
-    console.log('Generating resume with:', { jobDescription, uploadedFile })
-  }
 
+    if(jobDescription.trim().length > 0 && uploadedFile !== null){
+      await handleHttpRequest()
+    }
+    
+  }
   const canGenerate = jobDescription.trim().length > 0 && uploadedFile !== null
 
+  const handleHttpRequest = async()=>{
+    const formData = new FormData()
+    formData.append('job_description', jobDescription)
+    if(uploadedFile!=null){
+      formData.append('resume', uploadedFile)
+    }
+    const response = await axios.post(`${backendEndpoint}/optimizer/optimize`, formData)
+    setGeneratedResume(response.data)
+  }
+
+  useEffect(()=>{
+    if(generatedResume!==''){
+      setIsGenerating(false)
+      setIsGenerated(true)
+      console.log(generatedResume)
+    }
+
+  },[generatedResume])
+
   return (
+    !isGenerated ?
     <div className="container mx-auto px-4 py-12 md:py-20 max-w-5xl">
       {/* Header */}
       <div className="text-center mb-12 md:mb-16">
@@ -157,5 +181,7 @@ export function ResumeOptimizer() {
         </div>
       </div>
     </div>
+    : 
+    <DownloadResume />
   )
 }
