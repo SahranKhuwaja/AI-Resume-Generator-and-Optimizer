@@ -3,13 +3,16 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { CheckCircle2, Download, FileText } from "lucide-react"
+import { jsPDF } from 'jspdf';
 
-export default function DownloadResume() {
+export default function DownloadResume({resume} : any) {
   const handleDownload = () => {
 
-    console.log("Downloading resume...")
-
-    alert("Resume download started!")
+    const doc = new jsPDF()
+    doc.text(resume, 10, 10)
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    doc.save("Optimized_Resume.pdf")
   }
 
   return (

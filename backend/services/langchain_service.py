@@ -60,6 +60,7 @@ system_prompt_for_optimization = """
                         - Output only the optimized resume (no keywords like 'optimized resume is' etc.)
                         - Name should be Bold and centered.
                         - All section titles should be bold
+                        - Start resume directly with Name
                 """
 
 

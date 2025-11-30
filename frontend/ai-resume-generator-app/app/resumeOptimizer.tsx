@@ -40,7 +40,7 @@ export function ResumeOptimizer() {
       formData.append('resume', uploadedFile)
     }
     const response = await axios.post(`${backendEndpoint}/optimizer/optimize`, formData)
-    setGeneratedResume(response.data)
+    setGeneratedResume(response.data.generated_resume)
   }
 
   useEffect(()=>{
@@ -182,6 +182,6 @@ export function ResumeOptimizer() {
       </div>
     </div>
     : 
-    <DownloadResume />
+    <DownloadResume resume={generatedResume}/>
   )
 }
