@@ -2,8 +2,9 @@ from pydantic import BaseModel
 from typing import Optional
 
 class Response(BaseModel):
-    filename: Optional[str] = None
-    content_type: Optional[str] = None
+    pdf_stream: Optional[bytes] = None,
+    as_attachment: Optional[bool] = None,
+    download_name: Optional[str] = None,
+    mimetype: Optional[str] = None
     success: bool
-    generated_resume: Optional[str] = None
     error: Optional[str] = None
