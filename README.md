@@ -155,4 +155,4 @@ Using embeddings + cosine similarity measuring (already partially implemented).
 
 **👨‍💻 Author**
 
-Sahran Khuwaja 🚀 AI & Robotics Enthusiast | Full-Stack Developer | Data Scientist
+Sahran Khuwaja 🚀 Maching Learning Engineer | AI & Robotics Enthusiast | Full-Stack Developer | Data Scientist
