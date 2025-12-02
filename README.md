@@ -5,8 +5,8 @@ This project takes an existing resume and a job description, analyzes both, and 
 
 The system currently focuses on resume optimization, and new features like resume creation from scratch are being developed.
 
-🚀 Tech Stack
-Frontend
+**🚀 Tech Stack**
+**Frontend**
 
 Next.js 
 
@@ -20,7 +20,7 @@ Displaying optimized resume
 
 Downloading generated PDF
 
-Backend
+**Backend**
 
 Flask (Python)
 
@@ -32,7 +32,7 @@ Sentence extraction + preprocessing utilities
 
 PDF generation using FPDF
 
-AI
+**AI**
 
 Local LLM inference through Ollama
 
@@ -48,7 +48,7 @@ Maintaining professional tone
 
 (Model may be upgraded later for better accuracy or performance.)
 
-🧠 How It Works (Architecture Overview)
+**🧠 How It Works (Architecture Overview)**
 1️⃣ User Uploads Resume + Job Description
 
 From the Next.js UI:
@@ -115,7 +115,7 @@ Handles error messaging
 
 Smooth UI indicates loading & processing states
 
-✨ Current Features
+**✨ Current Features**
 
 ✔ Upload existing resume
 ✔ Paste job description
@@ -126,7 +126,7 @@ Smooth UI indicates loading & processing states
 ✔ UI/UX with validation and animations
 ✔ Fast local inference (no API cost)
 
-🔮 Upcoming Features
+**🔮 Upcoming Features**
 
 🟦 Resume creation from scratch
 Users enter:
@@ -152,6 +152,6 @@ Using embeddings + cosine similarity measuring (already partially implemented).
 
 🟪 Automatic missing-keyword detection
 
-👨‍💻 Author
+**👨‍💻 Author**
 
 Sahran Khuwaja 🚀 AI & Robotics Enthusiast | Full-Stack Developer | Data Scientist
