@@ -49,6 +49,7 @@ Maintaining professional tone
 (Model may be upgraded later for better accuracy or performance.)
 
 **🧠 How It Works (Architecture Overview)**
+
 1️⃣ User Uploads Resume + Job Description
 
 From the Next.js UI:
