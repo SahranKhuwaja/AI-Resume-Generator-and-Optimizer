@@ -16,7 +16,7 @@ export function ResumeOptimizer() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [backendEndpoint, setBackendEndpoint] = useState('http://127.0.0.1:5000')
   const [isGenerated, setIsGenerated] = useState(false)
-  const [generatedResume, setGeneratedResume] = useState("")
+  const [generatedResume, setGeneratedResume] = useState(null)
 
   const handleGenerate = async () => {
     if (!jobDescription.trim() || !uploadedFile) {
@@ -39,15 +39,14 @@ export function ResumeOptimizer() {
     if(uploadedFile!=null){
       formData.append('resume', uploadedFile)
     }
-    const response = await axios.post(`${backendEndpoint}/optimizer/optimize`, formData)
-    setGeneratedResume(response.data.generated_resume)
+    const response = await axios.post(`${backendEndpoint}/optimizer/optimize`, formData, { responseType: 'blob' })
+    setGeneratedResume(response.data)
   }
 
   useEffect(()=>{
-    if(generatedResume!==''){
+    if(generatedResume!==null){
       setIsGenerating(false)
       setIsGenerated(true)
-      console.log(generatedResume)
     }
 
   },[generatedResume])
@@ -182,6 +181,6 @@ export function ResumeOptimizer() {
       </div>
     </div>
     : 
-    <DownloadResume resume={generatedResume}/>
+    <DownloadResume resumeBytes={generatedResume}/>
   )
 }

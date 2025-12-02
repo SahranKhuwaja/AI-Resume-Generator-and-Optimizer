@@ -4,6 +4,7 @@ from util.read_file import get_data_from_file_type
 from base_models.response import Response
 from fpdf import FPDF
 from io import BytesIO
+import unicodedata
 
 optimizer_router = Blueprint('resumeOptimizer', __name__)
 
@@ -29,15 +30,34 @@ def optimizer() -> Response:
                     mimetype="application/pdf")
 
 def text_to_bytes(text: str) -> bytes:
+   santized_text = sanitize_text_for_pdf(text)
    pdf = FPDF()
    pdf.add_page()
    pdf.set_auto_page_break(auto=True, margin=15)
    pdf.set_font("Arial", size=11)
-   pdf.multi_cell(0, 6, txt=text)
+   pdf.multi_cell(0, 6, txt=santized_text)
 
-   pdf_buffer = BytesIO()
-   pdf.output(pdf_buffer)
+   pdf_str = pdf.output(dest="S")
+   pdf_bytes = pdf_str.encode("latin-1", "ignore")
 
-   pdf_bytes = pdf_buffer.getvalue()
-   pdf_buffer.close()
    return pdf_bytes
+
+def sanitize_text_for_pdf(text: str) -> str:
+    # Replace common Unicode punctuation with ASCII equivalents
+    replacements = {
+        "\u2013": "-",   
+        "\u2014": "-",   
+        "\u2018": "'",   
+        "\u2019": "'",   
+        "\u201c": '"',   
+        "\u201d": '"',   
+        "\u2022": "-",   
+        "\u00a0": " ",   
+    }
+    for bad, good in replacements.items():
+        text = text.replace(bad, good)
+
+    # Normalize and drop anything still not representable in latin-1
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if ord(ch) < 256)
+    return text
