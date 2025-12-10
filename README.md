@@ -1,5 +1,7 @@
 **AI Resume Generator & Optimizer**
 
+**DEMO:** https://drive.google.com/file/d/1gU8q5dsQCDQlcPYde8o-C8Q36qnDpeC9/view
+
 An intelligent resume-enhancement system built using Next.js, Flask, LangChain, DeepSeek, and Ollama.
 This project takes an existing resume and a job description, analyzes both, and rewrites the resume to maximize ATS (Applicant Tracking System) keyword match, clarity, and relevance.
 
